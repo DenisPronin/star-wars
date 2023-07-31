@@ -1,13 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { apiCharactersLoadItem, apiCharactersLoadPage } from './api/apiCharacters';
 import App from './App';
+import './index.css';
 import reportWebVitals from './reportWebVitals';
-
-apiCharactersLoadPage();
-apiCharactersLoadItem('1');
+import { store } from './store';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +24,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
 
