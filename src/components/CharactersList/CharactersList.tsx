@@ -1,7 +1,7 @@
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar, List } from 'antd';
 import { useAppDispatch } from 'interfaces';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { characterLoadList } from '../../store/Characters/Characters.actions';
 import { selectCharactersModel } from '../../store/Characters/Characters.selectors';
@@ -11,9 +11,13 @@ export function CharactersList() {
   const dispatch = useAppDispatch();
   const charactersModel = useSelector(selectCharactersModel);
 
+  const onPageChange = useCallback((page: number) => {
+    dispatch(characterLoadList(page));
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(characterLoadList(1));
-  }, []);
+  }, [dispatch]);
 
   return (
     <List
@@ -25,6 +29,8 @@ export function CharactersList() {
         showSizeChanger: false,
         position: 'bottom',
         align: 'start',
+        disabled: charactersModel.isLoading,
+        onChange: onPageChange,
       }}
       dataSource={charactersModel.list}
       loading={{

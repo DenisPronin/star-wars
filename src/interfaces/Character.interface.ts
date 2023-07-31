@@ -1,20 +1,19 @@
-import { Nullish } from './Utils.interface';
+import { NotAvailable, Nullish, Unknown } from './Utils.interface';
 
 export type IApiUrl = string;
 
 export enum IGender {
   Male = 'male',
   Female = 'female',
-  NA = 'n/a',
 }
 
 export interface ICharacter {
   created: string;
   edited: string;
-  gender: IGender;
-  birth_year: string;
-  eye_color: string;
-  hair_color: string;
+  gender: IGender | NotAvailable | Unknown;
+  birth_year: string | Unknown;
+  eye_color: string | NotAvailable | Unknown;
+  hair_color: string | NotAvailable | Unknown;
   skin_color: string;
   height: string;
   mass: string;
