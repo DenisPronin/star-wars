@@ -7,7 +7,10 @@ export const {
   charactersLoaded,
 } = charactersSlice.actions;
 
-export const characterLoadList = (page: number, search?: string) => async (dispatch: AppDispatch) => {
+export const characterLoadList = (
+  page: number,
+  search?: string,
+) => async (dispatch: AppDispatch) => {
   try {
     dispatch(charactersLoading(true));
     const response: ICharacterListResponse = await apiCharactersLoadPage(page, search);
