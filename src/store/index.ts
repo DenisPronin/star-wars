@@ -1,14 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux';
-import { charactersReducer } from './characters';
+import { configureStore } from '@reduxjs/toolkit';
+import { CHARACTERS_STORE_KEY, charactersReducer } from './Characters/Characters.reducer';
 
 export const store = configureStore({
   reducer: {
-    characters: charactersReducer,
+    [CHARACTERS_STORE_KEY]: charactersReducer,
   },
 });
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-
-export const useAppDispatch: () => AppDispatch = useDispatch;

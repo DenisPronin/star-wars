@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.list :global(.ant-list-pagination) {
+  margin-top: 16px;
+}
+
+.listInner {
+  flex-grow: 1;
+  overflow: auto;
+}

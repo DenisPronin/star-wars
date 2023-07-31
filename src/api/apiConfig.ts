@@ -8,6 +8,6 @@ queryInstance.interceptors.response.use(
   (response) => response.data,
 );
 
-export function queryGet(url: string, config = {}) {
-  return queryInstance.get(url, config);
+export function queryGet<R>(url: string, config = {}) {
+  return queryInstance.get<any, R>(url, config);
 }
