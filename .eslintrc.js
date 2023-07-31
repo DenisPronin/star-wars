@@ -4,6 +4,7 @@ module.exports = {
     project: "./tsconfig.json"
   },
   rules: {
-    'object-curly-newline': ['error', {multiline: true, consistent: true}]
+    'object-curly-newline': ['error', {multiline: true, consistent: true}],
+    'import/prefer-default-export': 0,
   }
 };

@@ -1,9 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 
-export const apiUrl = 'https://swapi.dev/api';
-
 const queryInstance: AxiosInstance = axios.create({
-  baseURL: apiUrl,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 queryInstance.interceptors.response.use(
