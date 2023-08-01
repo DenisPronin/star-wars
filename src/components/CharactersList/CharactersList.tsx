@@ -4,7 +4,6 @@ import { ICharacter, useAppDispatch } from 'interfaces';
 import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useDebouncedCallback } from 'use-debounce';
 import { characterLoadList, characterSelectedLoaded } from '../../store/Characters/Characters.actions';
 import { selectCharactersModel } from '../../store/Characters/Characters.selectors';
 import { getIdFromSWApiUrl } from '../../utils/url';
@@ -18,15 +17,6 @@ export function CharactersList() {
   const handleSearch = useCallback((value: string) => {
     dispatch(characterLoadList(1, value));
   }, [dispatch]);
-
-  const handleSearchInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    handleSearch(event.target.value);
-  }, [handleSearch]);
-
-  const handleSearchInputChangeDebounced = useDebouncedCallback(
-    handleSearchInputChange,
-    300,
-  );
 
   const handlePageChange = useCallback((page: number) => {
     dispatch(characterLoadList(page));
@@ -49,8 +39,8 @@ export function CharactersList() {
           <Input.Search
             placeholder="Search character by name"
             disabled={charactersModel.isLoading}
+            enterButton="Search"
             onSearch={handleSearch}
-            onChange={handleSearchInputChangeDebounced}
           />
         </Col>
       </Row>
