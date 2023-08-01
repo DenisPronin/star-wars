@@ -15,6 +15,12 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  transition: all 500ms ease;
+}
+
+.headerLink:hover {
+  color: #3f74ac;
+  fill: #3f74ac;
 }
 
 .content {

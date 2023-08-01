@@ -1,5 +1,5 @@
-import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Spin, Tabs } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin, Tabs } from 'antd';
 import { useAppDispatch } from 'interfaces';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,8 +7,8 @@ import { useParams } from 'react-router-dom';
 import { characterLoad, characterReset } from '../../store/Characters/Characters.actions';
 import { ICharacterSelectedState } from '../../store/Characters/Characters.reducer';
 import { selectCharacterSelectedModel } from '../../store/Characters/Characters.selectors';
-import { CharacterCommonForm } from '../CharacterCommonForm/CharacterCommonForm';
 import { CharacterAdditionalData } from '../CharacterAdditionalData/CharacterAdditionalData';
+import { CharacterCommonForm } from '../CharacterCommonForm/CharacterCommonForm';
 import styles from './Character.module.css';
 
 export function Character() {
@@ -41,12 +41,11 @@ export function Character() {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <Avatar size="large" icon={<UserOutlined />} />
         {characterModel.data.name}
       </div>
 
       <Tabs
-        tabPosition="left"
+        tabPosition="top"
         items={[{
           label: 'Common info',
           key: '1',
