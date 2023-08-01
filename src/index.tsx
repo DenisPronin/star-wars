@@ -1,4 +1,5 @@
 import 'antd/dist/reset.css';
+import { ConfigProvider, theme } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -8,13 +9,26 @@ import reportWebVitals from './reportWebVitals';
 import { Router } from './router';
 import { persistor, store } from './store';
 
+const { defaultAlgorithm } = theme;
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Router />
+      <ConfigProvider
+        theme={{
+          algorithm: defaultAlgorithm,
+          token: {
+            fontFamily: 'Kanit',
+            fontSize: 16,
+            colorPrimary: '#3f74ac',
+          },
+        }}
+      >
+        <Router />
+      </ConfigProvider>
     </PersistGate>
   </Provider>,
 );

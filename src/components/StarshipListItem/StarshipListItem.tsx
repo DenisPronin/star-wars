@@ -10,7 +10,7 @@ export function StarshipListItem({ data }: {
     <List.Item>
       <List.Item.Meta
         avatar={
-          <Avatar size="large" icon={<RocketOutlined />} />
+          <Avatar size="large" shape="square" icon={<RocketOutlined />} />
         }
         title={data.name}
         description={data.model}

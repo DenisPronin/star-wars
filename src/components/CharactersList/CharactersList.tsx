@@ -66,10 +66,13 @@ export function CharactersList() {
         renderItem={(item) => (
           <List.Item className={styles.listItem} onClick={handleSelectCharacter(item)}>
             <List.Item.Meta
+              className={styles.listItemMeta}
               avatar={
                 <Avatar size="large" icon={<UserOutlined />} />
               }
-              title={item.name}
+              title={(
+                <div className={styles.listItemTitle}>{item.name}</div>
+              )}
               description={item.birth_year}
             />
           </List.Item>

@@ -1,5 +1,5 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin, Tabs } from 'antd';
+import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Spin, Tabs } from 'antd';
 import { useAppDispatch } from 'interfaces';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -39,8 +39,9 @@ export function Character() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.title}>
+        <Avatar size="large" icon={<UserOutlined />} />
         {characterModel.data.name}
       </div>
 

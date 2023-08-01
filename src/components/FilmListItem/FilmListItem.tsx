@@ -10,7 +10,7 @@ export function FilmListItem({ data }: {
     <List.Item>
       <List.Item.Meta
         avatar={
-          <Avatar size="large" icon={<VideoCameraOutlined />} />
+          <Avatar size="large" shape="square" icon={<VideoCameraOutlined />} />
         }
         title={data.title}
         description={(

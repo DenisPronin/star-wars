@@ -14,3 +14,15 @@
 .listItem {
   cursor: pointer;
 }
+
+:global(.ant-list) .listItem .listItemMeta {
+  align-items: center;
+}
+
+:global(.ant-list) .listItem .listItemMeta :global(.ant-list-item-meta-title) {
+  margin-bottom: 0;
+}
+
+.listItemTitle {
+  font-size: 18px;
+}
