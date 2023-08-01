@@ -21,6 +21,7 @@ export interface ICharacterListState {
 export interface IAdditionalDataItem {
   isLoading: boolean;
   isLoaded: boolean;
+  // TODO fix types
   data: any[];
 }
 

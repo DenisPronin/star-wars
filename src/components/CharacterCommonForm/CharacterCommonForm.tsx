@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, InputNumber, Row, Select } from 'antd';
+import { Button, Col, Form, Input, InputNumber, notification, Row, Select } from 'antd';
 import { ICharacter, IGender, IUnknownValues, useAppDispatch } from 'interfaces';
 import React, { useCallback } from 'react';
 import { characterEditFinish } from '../../store/Characters/Characters.actions';
@@ -9,21 +9,28 @@ export function CharacterCommonForm({ characterData }: {
 }) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
+  const [api, contextHolder] = notification.useNotification();
 
   const handleSubmit = useCallback((values: Partial<ICharacter>) => {
     dispatch(characterEditFinish({
       ...characterData,
       ...values,
     }));
+    api.success({
+      message: 'Saved!',
+      placement: 'bottomRight',
+    });
   }, [dispatch, characterData]);
 
   return (
     <Row className={styles.container}>
       <Col lg={12} md={24} sm={24} xs={24}>
+        {contextHolder}
         <Form
           form={form}
           layout="vertical"
           initialValues={characterData}
+          scrollToFirstError
           onFinish={handleSubmit}
         >
           <Form.Item
