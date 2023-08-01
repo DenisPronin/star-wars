@@ -2,17 +2,20 @@ import 'antd/dist/reset.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Router } from './router';
-import { store } from './store';
+import { persistor, store } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <Provider store={store}>
-    <Router />
+    <PersistGate loading={null} persistor={persistor}>
+      <Router />
+    </PersistGate>
   </Provider>,
 );
 
