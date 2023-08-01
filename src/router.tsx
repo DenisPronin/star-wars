@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
     errorElement: <div>error</div>,
   },
   {
-    path: 'characters/:contactId',
+    path: 'characters/:characterId',
     element: <Character />,
   },
 ]);

@@ -1,4 +1,4 @@
-import { ICharacterListResponse } from 'interfaces';
+import { ICharacter, ICharacterListResponse } from 'interfaces';
 import { queryGet } from './apiConfig';
 
 export function apiCharactersLoadPage(
@@ -13,6 +13,6 @@ export function apiCharactersLoadPage(
   });
 }
 
-export function apiCharactersLoadItem(id: string) {
-  return queryGet(`/people/${id}/`);
+export function apiCharactersLoadItem(id: string): Promise<ICharacter> {
+  return queryGet<ICharacter>(`/people/${id}/`);
 }

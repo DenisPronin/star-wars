@@ -1,11 +1,13 @@
-import { apiCharactersLoadPage } from 'api/apiCharacters';
-import { AppDispatch, ICharacterListResponse } from 'interfaces';
+import { apiCharactersLoadItem, apiCharactersLoadPage } from 'api/apiCharacters';
+import { AppDispatch, GetState, ICharacterListResponse } from 'interfaces';
 import { charactersSlice } from './Characters.reducer';
+import { selectCharacterSelectedModel } from './Characters.selectors';
 
 export const {
   charactersLoading,
   charactersLoaded,
   characterSelectedLoaded,
+  characterSelectedLoading,
 } = charactersSlice.actions;
 
 export const characterLoadList = (
@@ -24,5 +26,24 @@ export const characterLoadList = (
     console.error(e);
   } finally {
     dispatch(charactersLoading(false));
+  }
+};
+
+export const characterLoad = (
+  characterId?: string,
+) => async (dispatch: AppDispatch, getState: GetState) => {
+  const characterModel = selectCharacterSelectedModel(getState());
+  if (!characterId || characterModel.isLoaded) {
+    return;
+  }
+
+  try {
+    dispatch(characterSelectedLoading(true));
+    const response = await apiCharactersLoadItem(characterId);
+    dispatch(characterSelectedLoaded(response));
+  } catch (e) {
+    console.error(e);
+  } finally {
+    dispatch(characterSelectedLoading(false));
   }
 };

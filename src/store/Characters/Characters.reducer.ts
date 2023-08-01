@@ -18,13 +18,15 @@ export interface ICharacterListState {
   list: ICharacter[];
 }
 
+export interface ICharacterSelectedState {
+  isLoading: boolean;
+  isLoaded: boolean;
+  data: Nullish<ICharacter>;
+}
+
 export interface CharactersState {
   characters: ICharacterListState;
-  characterSelected: {
-    isLoading: boolean;
-    isLoaded: boolean;
-    data: Nullish<ICharacter>;
-  }
+  characterSelected: ICharacterSelectedState;
 }
 
 const initialState: CharactersState = {
@@ -58,12 +60,15 @@ export const charactersSlice = createSlice({
         isLoaded: true,
       };
     },
+    characterSelectedLoading: (state, action: PayloadAction<boolean>) => {
+      state.characterSelected.isLoading = action.payload;
+    },
     characterSelectedLoaded: (state, action: PayloadAction<ICharacter>) => {
       state.characterSelected = {
         isLoading: false,
         isLoaded: true,
         data: action.payload,
-      }
+      };
     },
   },
 });

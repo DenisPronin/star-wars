@@ -70,8 +70,8 @@ export function CharactersList() {
               avatar={
                 <Avatar size="large" icon={<UserOutlined />} />
               }
-              title={<div>{item.name}</div>}
-              description={<div>{item.birth_year}</div>}
+              title={item.name}
+              description={item.birth_year}
             />
           </List.Item>
         )}
