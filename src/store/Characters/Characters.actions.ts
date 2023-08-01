@@ -5,6 +5,7 @@ import { charactersSlice } from './Characters.reducer';
 export const {
   charactersLoading,
   charactersLoaded,
+  characterSelectedLoaded,
 } = charactersSlice.actions;
 
 export const characterLoadList = (

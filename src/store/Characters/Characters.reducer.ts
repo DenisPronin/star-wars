@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICharacter } from 'interfaces';
+import { ICharacter, Nullish } from 'interfaces';
 
 export const CHARACTERS_STORE_KEY = 'characters';
 
@@ -20,6 +20,11 @@ export interface ICharacterListState {
 
 export interface CharactersState {
   characters: ICharacterListState;
+  characterSelected: {
+    isLoading: boolean;
+    isLoaded: boolean;
+    data: Nullish<ICharacter>;
+  }
 }
 
 const initialState: CharactersState = {
@@ -30,6 +35,11 @@ const initialState: CharactersState = {
     isLoading: false,
     isLoaded: false,
     list: [],
+  },
+  characterSelected: {
+    isLoading: false,
+    isLoaded: false,
+    data: null,
   },
 };
 
@@ -47,6 +57,13 @@ export const charactersSlice = createSlice({
         isLoading: false,
         isLoaded: true,
       };
+    },
+    characterSelectedLoaded: (state, action: PayloadAction<ICharacter>) => {
+      state.characterSelected = {
+        isLoading: false,
+        isLoaded: true,
+        data: action.payload,
+      }
     },
   },
 });

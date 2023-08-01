@@ -1,14 +1,12 @@
-.list {
+.container {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
+  gap: 16px;
 }
 
-.list :global(.ant-list-pagination) {
-  margin-top: 16px;
-}
-
-.listInner {
+.list {
   flex-grow: 1;
   overflow: auto;
 }
