@@ -8,6 +8,7 @@ export const {
   charactersLoaded,
   characterSelectedLoaded,
   characterSelectedLoading,
+  characterSave,
 } = charactersSlice.actions;
 
 export const characterLoadList = (

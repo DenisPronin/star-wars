@@ -10,3 +10,7 @@
   flex-grow: 1;
   overflow: auto;
 }
+
+.listItem {
+  cursor: pointer;
+}

@@ -64,7 +64,7 @@ export function CharactersList() {
           indicator: <LoadingOutlined spin />,
         }}
         renderItem={(item) => (
-          <List.Item onClick={handleSelectCharacter(item)}>
+          <List.Item className={styles.listItem} onClick={handleSelectCharacter(item)}>
             <List.Item.Meta
               avatar={
                 <Avatar size="large" icon={<UserOutlined />} />
