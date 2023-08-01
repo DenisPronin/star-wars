@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState } from 'interfaces';
+import { AppState, ICharacter } from 'interfaces';
 import { CHARACTERS_STORE_KEY, CharactersState, ICharacterSelectedState } from './Characters.reducer';
 
 export const selectCharactersSlice = (state: AppState): CharactersState => {
@@ -14,4 +14,9 @@ export const selectCharactersModel = createSelector(
 export const selectCharacterSelectedModel = createSelector(
   selectCharactersSlice,
   (slice): ICharacterSelectedState => slice.characterSelected,
+);
+
+export const selectCharacterSavedByUrl = (url: string) => createSelector(
+  selectCharactersSlice,
+  (slice): Partial<ICharacter> => slice.charactersSaved[url] || {},
 );

@@ -1,7 +1,7 @@
 import { apiCharactersLoadItem, apiCharactersLoadPage } from 'api/apiCharacters';
 import { AppDispatch, GetState, ICharacterListResponse } from 'interfaces';
 import { charactersSlice } from './Characters.reducer';
-import { selectCharacterSelectedModel } from './Characters.selectors';
+import { selectCharacterSavedByUrl, selectCharacterSelectedModel } from './Characters.selectors';
 
 export const {
   charactersLoading,
@@ -14,12 +14,18 @@ export const {
 export const characterLoadList = (
   page: number,
   search?: string,
-) => async (dispatch: AppDispatch) => {
+) => async (dispatch: AppDispatch, getState: GetState) => {
   try {
     dispatch(charactersLoading(true));
     const response: ICharacterListResponse = await apiCharactersLoadPage(page, search);
+    // restore saved character
+    const state = getState();
+    const results = response.results.map((character) => {
+      const savedCharacter = selectCharacterSavedByUrl(character.url)(state);
+      return { ...character, ...savedCharacter };
+    });
     dispatch(charactersLoaded({
-      list: response.results,
+      list: results,
       count: response.count,
       page,
     }));
@@ -41,7 +47,12 @@ export const characterLoad = (
   try {
     dispatch(characterSelectedLoading(true));
     const response = await apiCharactersLoadItem(characterId);
-    dispatch(characterSelectedLoaded(response));
+    // restore saved character
+    const savedCharacter = selectCharacterSavedByUrl(response.url)(getState());
+    dispatch(characterSelectedLoaded({
+      ...response,
+      ...savedCharacter,
+    }));
   } catch (e: any) {
     if (e.response.status === 404) {
       dispatch(characterSelectedLoaded(null));
