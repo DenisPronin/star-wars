@@ -7,6 +7,8 @@ export enum IGender {
   Female = 'female',
 }
 
+export type ICharacterListKey = 'films' | 'species' | 'starships' | 'vehicles';
+
 export interface ICharacter {
   created: string;
   edited: string;

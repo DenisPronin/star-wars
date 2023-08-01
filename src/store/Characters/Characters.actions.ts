@@ -1,7 +1,8 @@
 import { apiCharactersLoadItem, apiCharactersLoadPage } from 'api/apiCharacters';
-import { AppDispatch, GetState, ICharacterListResponse } from 'interfaces';
+import { AppDispatch, GetState, ICharacter, ICharacterListResponse, ICharacterListKey } from 'interfaces';
+import { queryGet } from '../../api/apiConfig';
 import { charactersSlice } from './Characters.reducer';
-import { selectCharacterSavedByUrl, selectCharacterSelectedModel } from './Characters.selectors';
+import { selectCharacterAdditionalData, selectCharacterSavedByUrl, selectCharacterSelectedModel } from './Characters.selectors';
 
 export const {
   charactersLoading,
@@ -9,6 +10,10 @@ export const {
   characterSelectedLoaded,
   characterSelectedLoading,
   characterSave,
+  characterAdditionalDataInit,
+  characterAdditionalDataLoading,
+  characterAdditionalDataLoaded,
+  characterReset,
 } = charactersSlice.actions;
 
 export const characterLoadList = (
@@ -60,5 +65,45 @@ export const characterLoad = (
     console.error(e);
   } finally {
     dispatch(characterSelectedLoading(false));
+  }
+};
+
+export const characterEditFinish = (
+  character: ICharacter,
+) => (dispatch: AppDispatch) => {
+  dispatch(characterSave(character));
+  dispatch(characterSelectedLoaded(character));
+};
+
+export const characterLoadAdditionalData = (
+  listKey: ICharacterListKey,
+) => async (dispatch: AppDispatch, getState: GetState) => {
+  const characterModel = selectCharacterSelectedModel(getState());
+  if (!characterModel.data) {
+    return;
+  }
+
+  const urls = characterModel.data[listKey];
+
+  try {
+    const additionalDataItem = selectCharacterAdditionalData(listKey)(getState());
+    if (additionalDataItem?.isLoaded) {
+      return;
+    }
+
+    if (!additionalDataItem) {
+      dispatch(characterAdditionalDataInit(listKey));
+    }
+    dispatch(characterAdditionalDataLoading({ listKey, isLoading: true }));
+
+    const promises = urls.map((url) => {
+      return queryGet(url);
+    });
+    const response = await Promise.all(promises);
+    dispatch(characterAdditionalDataLoaded({ listKey, data: response }));
+  } catch (e) {
+    console.error(e);
+  } finally {
+    dispatch(characterAdditionalDataLoading({ listKey, isLoading: false }));
   }
 };

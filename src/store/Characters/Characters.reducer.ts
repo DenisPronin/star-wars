@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICharacter, Nullish, ObjectLike } from 'interfaces';
+import { ICharacter, ICharacterListKey, Nullish, ObjectLike } from 'interfaces';
 
 export const CHARACTERS_STORE_KEY = 'characters';
 
@@ -18,10 +18,21 @@ export interface ICharacterListState {
   list: ICharacter[];
 }
 
+export interface IAdditionalDataItem {
+  isLoading: boolean;
+  isLoaded: boolean;
+  data: any[];
+}
+
+export type IAdditionalData = {
+  [key in ICharacterListKey]?: IAdditionalDataItem;
+};
+
 export interface ICharacterSelectedState {
   isLoading: boolean;
   isLoaded: boolean;
   data: Nullish<ICharacter>;
+  additionalData: IAdditionalData;
 }
 
 export interface CharactersState {
@@ -43,6 +54,7 @@ const initialState: CharactersState = {
     isLoading: false,
     isLoaded: false,
     data: null,
+    additionalData: {},
   },
   charactersSaved: {},
 };
@@ -67,6 +79,7 @@ export const charactersSlice = createSlice({
     },
     characterSelectedLoaded: (state, action: PayloadAction<Nullish<ICharacter>>) => {
       state.characterSelected = {
+        ...state.characterSelected,
         isLoading: false,
         isLoaded: true,
         data: action.payload,
@@ -77,6 +90,47 @@ export const charactersSlice = createSlice({
         ...state.charactersSaved,
         [action.payload.url]: action.payload,
       };
+    },
+    characterAdditionalDataInit: (state, action: PayloadAction<ICharacterListKey>) => {
+      state.characterSelected.additionalData = {
+        ...state.characterSelected.additionalData,
+        [action.payload]: {
+          isLoading: false,
+          isLoaded: false,
+          data: [],
+        },
+      };
+    },
+    characterAdditionalDataLoading: (
+      state,
+      action: PayloadAction<{ listKey: ICharacterListKey, isLoading: boolean }>,
+    ) => {
+      const { listKey, isLoading } = action.payload;
+      state.characterSelected.additionalData = {
+        ...state.characterSelected.additionalData,
+        [listKey]: {
+          ...state.characterSelected.additionalData[listKey],
+          isLoading,
+        },
+      };
+    },
+    characterAdditionalDataLoaded: (
+      state,
+      action: PayloadAction<{ listKey: ICharacterListKey, data: any }>,
+    ) => {
+      const { listKey, data } = action.payload;
+      state.characterSelected.additionalData = {
+        ...state.characterSelected.additionalData,
+        [listKey]: {
+          ...state.characterSelected.additionalData[listKey],
+          isLoading: false,
+          isLoaded: true,
+          data,
+        },
+      };
+    },
+    characterReset: (state) => {
+      state.characterSelected = initialState.characterSelected;
     },
   },
 });

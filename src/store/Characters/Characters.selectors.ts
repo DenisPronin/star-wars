@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { AppState, ICharacter } from 'interfaces';
-import { CHARACTERS_STORE_KEY, CharactersState, ICharacterSelectedState } from './Characters.reducer';
+import { AppState, ICharacter, ICharacterListKey } from 'interfaces';
+import { CHARACTERS_STORE_KEY, CharactersState, IAdditionalDataItem, ICharacterSelectedState } from './Characters.reducer';
 
 export const selectCharactersSlice = (state: AppState): CharactersState => {
   return state[CHARACTERS_STORE_KEY];
@@ -19,4 +19,9 @@ export const selectCharacterSelectedModel = createSelector(
 export const selectCharacterSavedByUrl = (url: string) => createSelector(
   selectCharactersSlice,
   (slice): Partial<ICharacter> => slice.charactersSaved[url] || {},
+);
+
+export const selectCharacterAdditionalData = (listKey: ICharacterListKey) => createSelector(
+  selectCharactersSlice,
+  (slice): IAdditionalDataItem | undefined => slice.characterSelected.additionalData[listKey],
 );
