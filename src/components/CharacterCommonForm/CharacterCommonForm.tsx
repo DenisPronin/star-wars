@@ -29,6 +29,7 @@ export function CharacterCommonForm({ characterData }: {
           <Form.Item
             label="Name"
             name="name"
+            rules={[{ required: true, message: 'Please input character name!' }]}
           >
             <Input />
           </Form.Item>
