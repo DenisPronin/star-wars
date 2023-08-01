@@ -26,3 +26,13 @@
 .listItemTitle {
   font-size: 18px;
 }
+
+.listItem:hover .listItemTitle {
+  color: #3f74ac;
+  transition: all 500ms ease;
+}
+
+.listItem:hover :global(.ant-avatar) {
+  background: #3f74ac;
+  transition: all 500ms ease;
+}

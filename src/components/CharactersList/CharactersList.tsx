@@ -73,7 +73,13 @@ export function CharactersList() {
               title={(
                 <div className={styles.listItemTitle}>{item.name}</div>
               )}
-              description={item.birth_year}
+              description={(
+                <div>
+                  Films:
+                  {' '}
+                  {item.films.length}
+                </div>
+              )}
             />
           </List.Item>
         )}
