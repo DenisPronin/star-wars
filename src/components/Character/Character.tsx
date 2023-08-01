@@ -1,5 +1,5 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import { ColorPicker, Form, Input, InputNumber, Select, Spin } from 'antd';
+import { Form, Input, InputNumber, Select, Spin } from 'antd';
 import { IGender, IUnknownValues, useAppDispatch } from 'interfaces';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -34,8 +34,8 @@ export function Character() {
   return (
     <div>
       <Form
-        labelCol={{ xs: { span: 24 }, sm: { span: 2 } }}
-        wrapperCol={{ xs: { span: 24 }, sm: { span: 22 } }}
+        labelCol={{ xs: { span: 24 }, sm: { span: 3 } }}
+        wrapperCol={{ xs: { span: 24 }, sm: { span: 21 } }}
         initialValues={characterModel.data}
       >
         <Form.Item
@@ -74,21 +74,21 @@ export function Character() {
           label="Eye color"
           name="eye_color"
         >
-          <ColorPicker />
+          <Input />
         </Form.Item>
 
         <Form.Item
           label="Hair color"
           name="hair_color"
         >
-          <ColorPicker />
+          <Input />
         </Form.Item>
 
         <Form.Item
           label="Skin color"
           name="skin_color"
         >
-          <ColorPicker />
+          <Input />
         </Form.Item>
 
         <Form.Item

@@ -41,7 +41,10 @@ export const characterLoad = (
     dispatch(characterSelectedLoading(true));
     const response = await apiCharactersLoadItem(characterId);
     dispatch(characterSelectedLoaded(response));
-  } catch (e) {
+  } catch (e: any) {
+    if (e.response.status === 404) {
+      dispatch(characterSelectedLoaded(null));
+    }
     console.error(e);
   } finally {
     dispatch(characterSelectedLoading(false));

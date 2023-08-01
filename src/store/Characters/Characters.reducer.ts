@@ -63,7 +63,7 @@ export const charactersSlice = createSlice({
     characterSelectedLoading: (state, action: PayloadAction<boolean>) => {
       state.characterSelected.isLoading = action.payload;
     },
-    characterSelectedLoaded: (state, action: PayloadAction<ICharacter>) => {
+    characterSelectedLoaded: (state, action: PayloadAction<Nullish<ICharacter>>) => {
       state.characterSelected = {
         isLoading: false,
         isLoaded: true,

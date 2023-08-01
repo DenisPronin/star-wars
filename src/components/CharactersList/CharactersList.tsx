@@ -48,7 +48,6 @@ export function CharactersList() {
         <Col md={12}>
           <Input.Search
             placeholder="Search character by name"
-            loading={charactersModel.isLoading}
             disabled={charactersModel.isLoading}
             onSearch={handleSearch}
             onChange={handleSearchInputChangeDebounced}

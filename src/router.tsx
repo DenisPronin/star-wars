@@ -1,16 +1,25 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { Character } from './components/Character/Character';
 import { CharactersList } from './components/CharactersList/CharactersList';
+import { Layout } from './components/Layout/Layout';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <CharactersList />,
-    errorElement: <div>error</div>,
-  },
-  {
-    path: 'characters/:characterId',
-    element: <Character />,
-  },
-]);
+export function Router() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout><Outlet /></Layout>}>
+          <Route
+            path="/"
+            element={<CharactersList />}
+            errorElement={<div>error</div>}
+          />
+          <Route
+            path="characters/:characterId"
+            element={<Character />}
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}

@@ -2,11 +2,9 @@ import 'antd/dist/reset.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { RouterProvider } from 'react-router-dom';
-import { Layout } from './components/Layout/Layout';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { router } from './router';
+import { Router } from './router';
 import { store } from './store';
 
 const root = ReactDOM.createRoot(
@@ -14,9 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <Layout>
-      <RouterProvider router={router} />
-    </Layout>
+    <Router />
   </Provider>,
 );
 
