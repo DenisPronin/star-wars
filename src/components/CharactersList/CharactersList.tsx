@@ -39,6 +39,7 @@ export function CharactersList() {
           <Input.Search
             placeholder="Search character by name"
             disabled={charactersModel.isLoading}
+            allowClear
             enterButton="Search"
             onSearch={handleSearch}
           />
