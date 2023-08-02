@@ -1,5 +1,5 @@
-import { LoadingOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Col, Input, List, Pagination, Row } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Col, Input, List, Pagination, Row } from 'antd';
 import { ICharacter, useAppDispatch } from 'interfaces';
 import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { characterLoadList, characterSelectedLoaded } from '../../store/Characters/Characters.actions';
 import { selectCharactersModel } from '../../store/Characters/Characters.selectors';
 import { getIdFromSWApiUrl } from '../../utils/url';
+import { CharactersListItem } from '../CharactersListItem/CharactersListItem';
 import styles from './CharactersList.module.css';
 
 export function CharactersList() {
@@ -22,7 +23,7 @@ export function CharactersList() {
     dispatch(characterLoadList(page));
   }, [dispatch]);
 
-  const handleSelectCharacter = useCallback((character: ICharacter) => () => {
+  const handleSelectCharacter = useCallback((character: ICharacter) => {
     const id = getIdFromSWApiUrl(character.url);
     dispatch(characterSelectedLoaded(character));
     navigate(`/characters/${id}`);
@@ -54,25 +55,11 @@ export function CharactersList() {
           spinning: charactersModel.isLoading,
           indicator: <LoadingOutlined spin />,
         }}
-        renderItem={(item) => (
-          <List.Item className={styles.listItem} onClick={handleSelectCharacter(item)}>
-            <List.Item.Meta
-              className={styles.listItemMeta}
-              avatar={
-                <Avatar size="large" icon={<UserOutlined />} />
-              }
-              title={(
-                <div className={styles.listItemTitle}>{item.name}</div>
-              )}
-              description={(
-                <div>
-                  Films:
-                  {' '}
-                  {item.films.length}
-                </div>
-              )}
-            />
-          </List.Item>
+        renderItem={(character) => (
+          <CharactersListItem
+            character={character}
+            onSelect={handleSelectCharacter}
+          />
         )}
       />
 

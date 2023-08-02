@@ -9,23 +9,23 @@ export function CharacterCommonForm({ characterData }: {
 }) {
   const dispatch = useAppDispatch();
   const [form] = Form.useForm();
-  const [api, contextHolder] = notification.useNotification();
+  const [notificationApi, notificationContextHolder] = notification.useNotification();
 
   const handleSubmit = useCallback((values: Partial<ICharacter>) => {
     dispatch(characterEditFinish({
       ...characterData,
       ...values,
     }));
-    api.success({
+    notificationApi.success({
       message: 'Saved!',
       placement: 'bottomRight',
     });
-  }, [dispatch, characterData]);
+  }, [dispatch, characterData, notificationApi]);
 
   return (
     <Row className={styles.container}>
       <Col lg={12} md={24} sm={24} xs={24}>
-        {contextHolder}
+        {notificationContextHolder}
         <Form
           form={form}
           layout="vertical"
