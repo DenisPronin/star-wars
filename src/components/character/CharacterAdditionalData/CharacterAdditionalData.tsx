@@ -3,8 +3,8 @@ import { List } from 'antd';
 import { ICharacterListKey, useAppDispatch } from 'interfaces';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { characterLoadAdditionalData } from '../../store/Characters/Characters.actions';
-import { selectCharacterAdditionalData } from '../../store/Characters/Characters.selectors';
+import { characterLoadAdditionalData } from '../../../store/Characters/Characters.actions';
+import { selectCharacterAdditionalData } from '../../../store/Characters/Characters.selectors';
 import { FilmListItem } from '../FilmListItem/FilmListItem';
 import { StarshipListItem } from '../StarshipListItem/StarshipListItem';
 

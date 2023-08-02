@@ -4,9 +4,9 @@ import { ICharacter, useAppDispatch } from 'interfaces';
 import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { characterLoadList, characterSelectedLoaded } from '../../store/Characters/Characters.actions';
-import { selectCharactersModel } from '../../store/Characters/Characters.selectors';
-import { getIdFromSWApiUrl } from '../../utils/url';
+import { getIdFromSWApiUrl } from 'utils/url';
+import { characterLoadList, characterSelectedLoaded } from '../../../store/Characters/Characters.actions';
+import { selectCharactersModel } from '../../../store/Characters/Characters.selectors';
 import { CharactersListItem } from '../CharactersListItem/CharactersListItem';
 import styles from './CharactersList.module.css';
 

@@ -1,7 +1,7 @@
 import { Button, Col, Form, Input, InputNumber, notification, Row, Select } from 'antd';
 import { ICharacter, IGender, IUnknownValues, useAppDispatch } from 'interfaces';
 import React, { useCallback } from 'react';
-import { characterEditFinish } from '../../store/Characters/Characters.actions';
+import { characterEditFinish } from '../../../store/Characters/Characters.actions';
 import styles from './CharacterCommonForm.module.css';
 
 export function CharacterCommonForm({ characterData }: {
