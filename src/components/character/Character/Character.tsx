@@ -64,6 +64,12 @@ export function Character() {
           children: (
             <CharacterAdditionalData listKey="starships" />
           ),
+        }, {
+          label: 'Vehicles',
+          key: '4',
+          children: (
+            <CharacterAdditionalData listKey="vehicles" />
+          ),
         }]}
       />
     </div>

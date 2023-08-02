@@ -8,3 +8,5 @@ export enum IUnknownValues {
   Unknown = 'unknown',
   NotAvailable = 'n/a',
 }
+
+export type IApiUrl = string;

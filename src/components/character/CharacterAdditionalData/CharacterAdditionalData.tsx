@@ -7,6 +7,7 @@ import { characterLoadAdditionalData } from '../../../store/Characters/Character
 import { selectCharacterAdditionalData } from '../../../store/Characters/Characters.selectors';
 import { FilmListItem } from '../FilmListItem/FilmListItem';
 import { StarshipListItem } from '../StarshipListItem/StarshipListItem';
+import { VehicleListItem } from '../VehicleListItem/VehicleListItem';
 
 type IDataMap = {
   [key in ICharacterListKey]?: Function;
@@ -15,6 +16,7 @@ type IDataMap = {
 const DataMap: IDataMap = {
   films: FilmListItem,
   starships: StarshipListItem,
+  vehicles: VehicleListItem,
 };
 
 export function CharacterAdditionalData({ listKey }: {

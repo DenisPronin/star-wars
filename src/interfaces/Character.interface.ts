@@ -1,6 +1,4 @@
-import { IUnknownValues, Nullish } from './Utils.interface';
-
-export type IApiUrl = string;
+import { IApiUrl, IUnknownValues, Nullish } from './Utils.interface';
 
 export enum IGender {
   Male = 'male',
