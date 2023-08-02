@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { characterLoadAdditionalData } from '../../../store/Characters/Characters.actions';
 import { selectCharacterAdditionalData } from '../../../store/Characters/Characters.selectors';
 import { FilmListItem } from '../FilmListItem/FilmListItem';
+import { SpeciesListItem } from '../SpeciesListItem/SpeciesListItem';
 import { StarshipListItem } from '../StarshipListItem/StarshipListItem';
 import { VehicleListItem } from '../VehicleListItem/VehicleListItem';
 
@@ -17,6 +18,7 @@ const DataMap: IDataMap = {
   films: FilmListItem,
   starships: StarshipListItem,
   vehicles: VehicleListItem,
+  species: SpeciesListItem,
 };
 
 export function CharacterAdditionalData({ listKey }: {

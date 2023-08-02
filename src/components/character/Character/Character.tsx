@@ -70,6 +70,12 @@ export function Character() {
           children: (
             <CharacterAdditionalData listKey="vehicles" />
           ),
+        }, {
+          label: 'Species',
+          key: '5',
+          children: (
+            <CharacterAdditionalData listKey="species" />
+          ),
         }]}
       />
     </div>
