@@ -1,5 +1,5 @@
 import { Layout as AntLayout } from 'antd';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from 'media/darth-vader.svg';
 import styles from './Layout.module.css';
@@ -7,7 +7,7 @@ import styles from './Layout.module.css';
 const { Header, Content } = AntLayout;
 
 export function Layout({ children }: {
-  children: any;
+  children: ReactNode;
 }) {
   return (
     <AntLayout className={styles.layout}>

@@ -1,9 +1,10 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { List } from 'antd';
-import { ICharacterListKey, useAppDispatch } from 'interfaces';
+import { ICharacterListKey, IFilm, ISpecies, IStarship, IVehicle, useAppDispatch } from 'interfaces';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { characterLoadAdditionalData } from '../../../store/Characters/Characters.actions';
+import { IAdditionalDataByKey } from '../../../store/Characters/Characters.reducer';
 import { selectCharacterAdditionalData } from '../../../store/Characters/Characters.selectors';
 import { FilmListItem } from '../FilmListItem/FilmListItem';
 import { SpeciesListItem } from '../SpeciesListItem/SpeciesListItem';
@@ -25,7 +26,9 @@ export function CharacterAdditionalData({ listKey }: {
   listKey: ICharacterListKey;
 }) {
   const dispatch = useAppDispatch();
-  const model = useSelector(selectCharacterAdditionalData(listKey));
+  const model: IAdditionalDataByKey | undefined = useSelector(
+    selectCharacterAdditionalData(listKey),
+  );
 
   useEffect(() => {
     dispatch(characterLoadAdditionalData(listKey));
@@ -36,7 +39,7 @@ export function CharacterAdditionalData({ listKey }: {
   }
 
   return (
-    <List
+    <List<IFilm | IStarship | IVehicle | ISpecies>
       dataSource={model.data}
       loading={{
         size: 'large',

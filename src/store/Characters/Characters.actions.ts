@@ -1,7 +1,7 @@
 import { apiCharactersLoadItem, apiCharactersLoadPage } from 'api/apiCharacters';
 import { AppDispatch, GetState, ICharacter, ICharacterListResponse, ICharacterListKey } from 'interfaces';
 import { queryGet } from '../../api/apiConfig';
-import { charactersSlice } from './Characters.reducer';
+import { charactersSlice, IAdditionalDataItems } from './Characters.reducer';
 import { selectCharacterAdditionalData, selectCharacterSavedByUrl, selectCharacterSelectedModel } from './Characters.selectors';
 
 export const {
@@ -100,7 +100,7 @@ export const characterLoadAdditionalData = (
       return queryGet(url);
     });
     const response = await Promise.all(promises);
-    dispatch(characterAdditionalDataLoaded({ listKey, data: response }));
+    dispatch(characterAdditionalDataLoaded({ listKey, data: response as IAdditionalDataItems }));
   } catch (e) {
     console.error(e);
   } finally {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICharacter, ICharacterListKey, Nullish, ObjectLike } from 'interfaces';
+import { ICharacter, ICharacterListKey, IFilm, ISpecies, IStarship, IVehicle, Nullish, ObjectLike } from 'interfaces';
 
 export const CHARACTERS_STORE_KEY = 'characters';
 
@@ -18,15 +18,16 @@ export interface ICharacterListState {
   list: ICharacter[];
 }
 
-export interface IAdditionalDataItem {
+export type IAdditionalDataItems = IFilm[] | IStarship[] | IVehicle[] | ISpecies[];
+
+export interface IAdditionalDataByKey {
   isLoading: boolean;
   isLoaded: boolean;
-  // TODO fix types
-  data: any[];
+  data: IAdditionalDataItems;
 }
 
 export type IAdditionalData = {
-  [key in ICharacterListKey]?: IAdditionalDataItem;
+  [key in ICharacterListKey]?: IAdditionalDataByKey;
 };
 
 export interface ICharacterSelectedState {
@@ -117,7 +118,10 @@ export const charactersSlice = createSlice({
     },
     characterAdditionalDataLoaded: (
       state,
-      action: PayloadAction<{ listKey: ICharacterListKey, data: any }>,
+      action: PayloadAction<{
+        listKey: ICharacterListKey,
+        data: IAdditionalDataItems,
+      }>,
     ) => {
       const { listKey, data } = action.payload;
       state.characterSelected.additionalData = {
