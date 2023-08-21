@@ -1,7 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Col, Input, List, Pagination, Row } from 'antd';
 import { ICharacter, useAppDispatch } from 'interfaces';
-import React, { useCallback, useEffect } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getIdFromSWApiUrl } from 'utils/url';
@@ -14,14 +14,19 @@ export function CharactersList() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const charactersModel = useSelector(selectCharactersModel);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearchChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  }, []);
 
   const handleSearch = useCallback((value: string) => {
     dispatch(characterLoadList(1, value));
   }, [dispatch]);
 
   const handlePageChange = useCallback((page: number) => {
-    dispatch(characterLoadList(page));
-  }, [dispatch]);
+    dispatch(characterLoadList(page, searchValue));
+  }, [dispatch, searchValue]);
 
   const handleSelectCharacter = useCallback((character: ICharacter) => {
     const id = getIdFromSWApiUrl(character.url);
@@ -42,6 +47,8 @@ export function CharactersList() {
             disabled={charactersModel.isLoading}
             allowClear
             enterButton="Search"
+            value={searchValue}
+            onChange={handleSearchChange}
             onSearch={handleSearch}
           />
         </Col>
